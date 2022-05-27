@@ -1,0 +1,20 @@
+<form action="{% url 'hello:kirim' %}" method="post">
+
+    {% csrf_token %}
+
+    {% if name %}
+
+        <input type="text" name="txtNama" placeholder="Ketik nama">
+        <button type="submit">Kirim</button></br></br>
+
+        At {{time}},<br/>
+        Hello, <b>{{name}}</b>.
+
+    {% else %}
+
+        <input type="text" name="txtNama" placeholder="Ketik nama">
+        <button type="submit">Kirim</button><br/><br/>
+
+    {% endif %}
+
+</form>

@@ -1,0 +1,400 @@
+<html>
+
+    <head>
+        <title>PhoneBook - List</title>
+
+        <!-- jquery -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+        <!-- jqueryui -->
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+        <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+
+        <!-- bootstrap -->
+        <link rel="stylesheet" href="/static/bootstrap/bootstrap.min.css">
+        <script src="/static/bootstrap/bootstrap.bundle.min.js"></script>
+
+        <!-- datatables -->
+        <link rel="stylesheet" href="/static/datatables/css/jquery.dataTables.min.css">
+        <script src="/static/datatables/js/jquery.dataTables.min.js"></script>
+
+
+    </head>
+
+    <body>
+
+        <div class="container pt-1">
+
+            <div class="row mb-3">
+
+                <button
+                    class="col-sm-1 btn btn-sm btn-primary mr-1"
+                    onclick=" $('.dlgTambah').dialog('open'); "
+                >
+                    Tambah
+                </button>
+
+            </div>
+
+            <hr>
+
+            <div class="row">
+                <div class="" style="">
+                    <table class="tbl_list">
+                        <thead>
+                            <tr>
+                                <th>Nama</th>
+                                <th>Alamat</th>
+                                <th>Telepon</th>
+                                <th>Hobby</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {% for phone in phones %}
+                                <tr>
+                                    <td>
+                                        <a href="#" onclick="Phone_Get( {{ phone.id }} );">{{ phone.name }}</a>
+
+                                        <a href="#" onclick="Phone_Delete( {{ phone.id }} );"> X</a>
+                                    </td>
+                                    <td>{{ phone.address }}</td>
+                                    <td>{{ phone.phone }}</td>
+                                    <td>{{ phone.hobby }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="dlgTambah">
+            <div class="container">
+
+                {% csrf_token %}
+
+                <!-- nama -->
+                <div class="row mb-3 ">
+                    <label class=" col-sm-3 col-form-label">Nama</label>
+                    <div class="col-sm-9">
+                        <input class="form-control col-sm-9 edNama" name="edNama" />
+                    </div>
+                </div>
+
+                <!-- alamat -->
+                <div class="row mb-3 ">
+                    <label class=" col-sm-3 col-form-label">Alamat</label>
+                    <div class="col-sm-9">
+                        <input class="form-control col-sm-9 edAlamat" name="edAlamat" />
+                    </div>
+                </div>
+
+                <!-- telepon -->
+                <div class="row mb-3 ">
+                    <label class=" col-sm-3 col-form-label">Telepon</label>
+                    <div class="col-sm-9">
+                        <input class="form-control col-sm-9 edTelepon" name="edTelepon" />
+                    </div>
+                </div>
+
+                <!-- email -->
+                <div class="row mb-3 ">
+                    <label class=" col-sm-3 col-form-label">E-mail</label>
+                    <div class="col-sm-9">
+                        <input class="form-control col-sm-9 edEmail" name="edEmail" />
+                    </div>
+                </div>
+
+                <!-- hobby -->
+                <div class="row mb-3">
+                    <label class=" col-sm-3 col-form-label">Hobby</label>
+                    <div class="col-sm-9">
+                        <input class="form-control col-sm-9 edHobby" name="edHobby" />
+                    </div>
+                </div>
+
+                <!-- dob -->
+                <div class="row mb-3">
+                    <label class=" col-sm-3 col-form-label">Tanggal Lahir</label>
+                    <div class="col-sm-9">
+                        <input class="form-control col-sm-9 edDob" name="edDob" />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="dlgEdit">
+            <div class="container">
+
+                {% csrf_token %}
+
+                <input class="id" name="id" type="hidden" />
+
+                <!-- nama -->
+                <div class="row mb-3 ">
+                    <label class=" col-sm-3 col-form-label">Nama</label>
+                    <div class="col-sm-9">
+                        <input class="form-control col-sm-9 edNama" name="edNama" />
+                    </div>
+                </div>
+
+                <!-- alamat -->
+                <div class="row mb-3 ">
+                    <label class=" col-sm-3 col-form-label">Alamat</label>
+                    <div class="col-sm-9">
+                        <input class="form-control col-sm-9 edAlamat" name="edAlamat" />
+                    </div>
+                </div>
+
+                <!-- telepon -->
+                <div class="row mb-3 ">
+                    <label class=" col-sm-3 col-form-label">Telepon</label>
+                    <div class="col-sm-9">
+                        <input class="form-control col-sm-9 edTelepon" name="edTelepon" />
+                    </div>
+                </div>
+
+                <!-- email -->
+                <div class="row mb-3 ">
+                    <label class=" col-sm-3 col-form-label">E-mail</label>
+                    <div class="col-sm-9">
+                        <input class="form-control col-sm-9 edEmail" name="edEmail" />
+                    </div>
+                </div>
+
+                <!-- hobby -->
+                <div class="row mb-3">
+                    <label class=" col-sm-3 col-form-label">Hobby</label>
+                    <div class="col-sm-9">
+                        <input class="form-control col-sm-9 edHobby" name="edHobby" />
+                    </div>
+                </div>
+
+                <!-- dob -->
+                <div class="row mb-3">
+                    <label class=" col-sm-3 col-form-label">Tanggal Lahir</label>
+                    <div class="col-sm-9">
+                        <input class="form-control col-sm-9 edDob" name="edDob" />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <script>
+            $(".tbl_list").dataTable({
+                lengthMenu: [5, 10, 15, 20, 40, 60, 80, 100, 200],
+                scrollY: "300px",
+                order: [[2, 'desc']],
+                columns: [
+                    null,
+                    { title: 'Alamat Dia...' },
+                    null,
+                    { searchable: false }
+                ],
+                pagingType: 'first_last_numbers'
+            });
+
+            $(".dlgTambah").dialog({
+                buttons: [
+                    {
+                        text: 'Simpan',
+                        click: function()
+                        {
+                            Phone_SubmitTambah();
+                        }
+                    },
+                    {
+                        text: 'Batal',
+                        click: function()
+                        {
+                            $(this).dialog('close');
+                        }
+                    }
+                ],
+                autoOpen: false,
+                modal: true,
+                draggable: true,
+                resizable: true,
+                title: "Tambah Phone Record",
+                width: "500px"
+            });
+
+            $(".dlgEdit").dialog({
+                buttons: [
+                    {
+                        text: 'Simpan',
+                        click: function()
+                        {
+                            Phone_SubmitEdit();
+                        }
+                    },
+                    {
+                        text: 'Batal',
+                        click: function()
+                        {
+                            $(this).dialog('close');
+                        }
+                    }
+                ],
+                autoOpen: false,
+                modal: true,
+                draggable: false,
+                resizable: false,
+                title: "Edit Rekord Telepon",
+                width: "500px"
+            });
+
+            $(".dlgTambah input[name=edDob]").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: 'DD, yy-mm-dd',
+                closeText: 'Tutuplah...',
+                showButtonPanel: true,
+                currentText: "Hari ini.",
+                dayNames: ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'],
+                dayNamesMin: ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'],
+                numberOfMonths: 3,
+                showOtherMonths: true,
+                selectOtherMonths: true,
+                showMonthAfterYear: true,
+                showWeek: true
+            });
+
+            function Phone_SubmitTambah()
+            {
+                var csrf = $('.dlgTambah input[name="csrfmiddlewaretoken"]').val();
+                var nama = $('.dlgTambah .edNama').val();
+                var alamat = $('.dlgTambah .edAlamat').val();
+                var telepon = $('.dlgTambah .edTelepon').val();
+                var email = $('.dlgTambah .edEmail').val();
+                var hobby = $('.dlgTambah .edHobby').val();
+                var dob = $('.dlgTambah input[name="edDob"]').val();
+
+                $.ajax({
+                    url: '/hello/add/',
+                    data: {
+                        csrfmiddlewaretoken: csrf,
+                        nama: nama,
+                        alamat: alamat,
+                        telepon: telepon,
+                        email: email,
+                        hobby: hobby,
+                        dob: dob
+                    },
+                    method: 'POST',
+                    processData: true,
+                    dataType: 'json',
+                    error: function()
+                    {
+
+                    },
+                    success: function(data)
+                    {
+                        $('.dlgTambah').dialog('close');
+
+                        window.location.reload();
+                    }
+                });
+            }
+
+            function Phone_Get(id)
+            {
+                $.ajax({
+                    url: '/hello/get/',
+                    data: {
+                        id: id
+                    },
+                    method: 'GET',
+                    processData: true,
+                    dataType: 'json',
+                    error: function()
+                    {
+
+                    },
+                    success: function(data)
+                    {
+                        $('.dlgEdit .id').val(data.id);
+                        $('.dlgEdit .edNama').val(data.name);
+                        $('.dlgEdit .edAlamat').val(data.address);
+                        $('.dlgEdit .edTelepon').val(data.phone);
+                        $('.dlgEdit .edHobby').val(data.hobby);
+                        $('.dlgEdit .edDob').val(data.dob);
+
+                        $('.dlgEdit').dialog('open');
+                    }
+                });
+            }
+
+            function Phone_SubmitEdit()
+            {
+                var csrf = $('.dlgEdit input[name="csrfmiddlewaretoken"]').val();
+                var id = $('.dlgEdit .id').val();
+                var nama = $('.dlgEdit .edNama').val();
+                var alamat = $('.dlgEdit .edAlamat').val();
+                var telepon = $('.dlgEdit .edTelepon').val();
+                var email = $('.dlgEdit .edEmail').val();
+                var hobby = $('.dlgEdit .edHobby').val();
+                var dob = $('.dlgEdit input[name="edDob"]').val();
+
+                $.ajax({
+                    url: '/hello/update/',
+                    data: {
+                        csrfmiddlewaretoken: csrf,
+                        id: id,
+                        name: nama,
+                        address: alamat,
+                        phone: telepon,
+                        email: email,
+                        hobby: hobby,
+                        dob: dob
+                    },
+                    method: 'POST',
+                    processData: true,
+                    dataType: 'json',
+                    error: function()
+                    {
+
+                    },
+                    success: function(data)
+                    {
+                        $('.dlgEdit').dialog('close');
+
+                        window.location.reload();
+                    }
+                });
+            }
+
+            function Phone_Delete(id)
+            {
+                var data = {};
+
+                data.id = id;
+                data.csrfmiddlewaretoken = $('.dlgEdit input[name="csrfmiddlewaretoken"]').val();
+
+                $.ajax({
+                    url: '/hello/delete/',
+                    data: data,
+                    processData: true,
+                    dataType: 'json',
+                    method: 'POST',
+                    error: function()
+                    {
+
+                    },
+                    success: function(data)
+                    {
+                        window.location.reload();
+                    }
+                });
+            }
+
+        </script>
+
+    </body>
+
+</html>

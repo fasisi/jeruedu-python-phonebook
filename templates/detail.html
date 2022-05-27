@@ -1,0 +1,9 @@
+<h1>{{ question.question_text }}</h1>
+
+<ul>
+    {% for item in question.choice_set.objects.all() %}
+        <li>
+            {{ item.choice_text }}
+        </li>
+    {% endfor %}
+</ul>
